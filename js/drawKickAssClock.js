@@ -1,6 +1,8 @@
 function drawKickAssClock (position) {
 	// Today's sun info
 	var times = SunCalc.getTimes(new Date(), position.latitude, position.longitude);
+	var offset = times.nadir.getTimezoneOffset();
+	console.log(offset);
 
 	// Today's moon info
 	var moontimes = SunCalc.getMoonTimes(new Date(), position.latitude, position.longitude);
@@ -33,18 +35,18 @@ function drawKickAssClock (position) {
 	var moonColor = 'rgba(85,85,85,1)';
 
 	// Transform times into 24 hour clock angles
-	var sunriseAngle = timeToRadians(times.sunrise);
-	var sunsetAngle = timeToRadians(times.sunset);
-	var solarNoonAngle = timeToRadians(times.solarNoon);
-	var midnightAngle = timeToRadians(times.nadir);
-	var nightStartAngle = timeToRadians(times.night);
-	var nightEndAngle = timeToRadians(times.nightEnd);
-	var twilightStartAngle = timeToRadians(times.dusk);
-	var twilightEndAngle = timeToRadians(times.dawn);
-	var goldenHourStartAngle = timeToRadians(times.goldenHourEnd);
-	var goldenHourEndAngle = timeToRadians(times.goldenHour);
-	var moonriseAngle = timeToRadians(moontimes.rise);
-	var moonsetAngle = timeToRadians(moontimes.set);
+	var sunriseAngle = timeToRadians(times.sunrise, offset);
+	var sunsetAngle = timeToRadians(times.sunset, offset);
+	var solarNoonAngle = timeToRadians(times.solarNoon, offset);
+	var midnightAngle = timeToRadians(times.nadir, offset);
+	var nightStartAngle = timeToRadians(times.night, offset);
+	var nightEndAngle = timeToRadians(times.nightEnd, offset);
+	var twilightStartAngle = timeToRadians(times.dusk, offset);
+	var twilightEndAngle = timeToRadians(times.dawn, offset);
+	var goldenHourStartAngle = timeToRadians(times.goldenHourEnd, offset);
+	var goldenHourEndAngle = timeToRadians(times.goldenHour, offset);
+	var moonriseAngle = timeToRadians(moontimes.rise, offset);
+	var moonsetAngle = timeToRadians(moontimes.set, offset);
 
 	// Fill the sun clock
 	drawcircle(ctx, radius, center, numbersMajor, black, dayColor, 'fill');
