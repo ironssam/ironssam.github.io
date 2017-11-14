@@ -2,7 +2,7 @@ function drawKickAssClock (position) {
 	var today = new Date();
 
 	// Today's sun info
-	var times = SunCalc.getTimes(today, -77.7, 151);
+	var times = SunCalc.getTimes(today, position.latitude, position.longitude);
 
 	// Today's moon info
 	var moontimes = SunCalc.getMoonTimes(today, position.latitude, position.longitude);
