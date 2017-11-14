@@ -1,4 +1,27 @@
 function drawKickAssClock (position) {
+	var d = new Date();
+	d.toUTCString();
+	var da = Math.floor(d.getTime() / 1000);
+	console.log("Da: " + da);
+
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+	    if (xhr.readyState == XMLHttpRequest.DONE) {
+	        alert(xhr.responseText);
+	    }
+	}
+	xhr.open('GET', "https://maps.googleapis.com/maps/api/timezone/json?location=" + position.latitude + "," + position.longitude + "&timestamp=" + da + "&key=AIzaSyCc4LKuyMPiTvjlUSK1uL7kbxP0R17u88M", true);
+	xhr.send(null);
+
+	/* Get date at lat long
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "https://maps.googleapis.com/maps/api/timezone/json?location=" + position.latitude + "," + position.longitude + "&timestamp=" + da + "&key=AIzaSyCc4LKuyMPiTvjlUSK1uL7kbxP0R17u88M", false);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
+    var response = JSON.parse(xhttp.responseText);
+    var offset = response.rawOffset;
+    console.log(offset);*/
+
 	// Today's sun info
 	var times = SunCalc.getTimes(new Date(), position.latitude, position.longitude);
 
