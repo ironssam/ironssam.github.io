@@ -1,0 +1,48 @@
+<!-- https://github.com/mourner/suncalc helped me do this. -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="style.css"/>
+		<title>Solar clock</title>
+	</head>
+	<body>
+		<div class="container">
+			<canvas id="clock" width="500" height="500"></canvas>
+		</div>
+		<script src="js/suncalc.js"></script>
+		<script src="js/highschoolmath.js"></script>
+		<script src="js/drawmoonstroke.js"></script>
+		<script src="js/drawMarker.js"></script>
+		<script src="js/drawsolarclockfields.js"></script>
+		<script src="js/drawmoonphase.js"></script>
+		<script src="js/drawNumbers.js"></script>
+		<script src="js/drawTime.js"></script>
+		<script src="js/centerCanvas.js"></script>
+		<script src="js/drawKickAssClock.js"></script>
+		<script>
+			var options = {
+			  enableHighAccuracy: true,
+			  timeout: 5000,
+			  maximumAge: 0
+			};
+
+			function success(pos) {
+				// Get lat long based on browser's geolocation
+				var crd = pos.coords;
+				var canvas = document.getElementById("clock");
+				var ctx = canvas.getContext("2d");
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				var center = centerCanvas(canvas);
+				drawKickAssClock(crd, canvas);
+			}
+
+			function error(err) {
+			  console.warn(`ERROR(${err.code}): ${err.message}`);
+			};
+
+			navigator.geolocation.getCurrentPosition(success,error,options);
+			setInterval(function(){navigator.geolocation.getCurrentPosition(success,error,options);}, 5000);
+		</script>
+	</body>
+</html>
