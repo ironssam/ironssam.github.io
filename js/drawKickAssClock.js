@@ -1,5 +1,13 @@
 function drawKickAssClock (position) {
 	var today = new Date();
+	var todayMonth = today.getMonth();
+	var todayDay = today.getDay();
+
+	if ((todayMonth >= 3 && todayDay >= 20) && (todayMonth <= 9 && todayDay <= 22)) {
+		var allDaySun = 'north';
+	} else {
+		var allDaySun = 'south';
+	}
 
 	// Today's sun info
 	var times = SunCalc.getTimes(today, position.latitude, position.longitude);
@@ -50,23 +58,37 @@ function drawKickAssClock (position) {
 	var moonsetAngle = timeToRadians(moontimes.set);
 
 	// Fill the sun clock
-	if (times.night instanceof Date && !isNaN(times.night.valueOf())==false) { // 24h sun
+	// 24 hour sun
+	if ((position.latitude >= 0 && allDaySun == 'north') || (position.latitude <= 0 && allDaySun == 'south')) {
 		drawcircle(ctx, radius, center, numbersMajor, black, dayColor, 'fill');
 		drawsolarclockfields(ctx, radius, center, goldenHourEndAngle, goldenHourStartAngle, numbersMinor, black, goldenHourColor, 'fill');
 		drawsolarclockfields(ctx, radius, center, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'fill');
 		drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'fill');
 		drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'fill');
-	} else if (times.dawn instanceof Date && !isNaN(times.dawn.valueOf())==false) { //24 dark
-		drawcircle(ctx, radius, center, numbersMajor, black, nightColor, 'fill');
-	} else if (times.sunrise instanceof Date && !isNaN(times.sunrise.valueOf())==false) {
-		drawcircle(ctx, radius, center, numbersMajor, black, sunriseSetColor, 'fill');
-		drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'fill');
-		drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'fill');
-	} else if (times.goldenHour instanceof Date && !isNaN(times.goldenHour.valueOf())==false) {
-		drawcircle(ctx, radius, center, numbersMajor, black, goldenHourColor, 'fill');
-		drawsolarclockfields(ctx, radius, center, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'fill');
-		drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'fill');
-		drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'fill');
+	}
+	// 24 hour night
+	if ((position.latitude >= 0 && allDaySun == 'south') || (position.latitude <= 0 && allDaySun == 'north')) {
+		if (!isNaN(times.night.valueOf())==false) {
+			drawcircle(ctx, radius, center, numbersMajor, black, nightColor, 'fill');
+		} else if (!isNaN(times.dawn.valueOf())==false) {
+			drawcircle(ctx, radius, center, numbersMajor, black, twilightColor, 'fill');
+			drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'fill');
+		} else if (!isNaN(times.sunrise.valueOf())==false) {
+			drawcircle(ctx, radius, center, numbersMajor, black, sunriseSetColor, 'fill');
+			drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'fill');
+			drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'fill');
+		} else if (!isNaN(times.goldenHour.valueOf())==false) {
+			drawcircle(ctx, radius, center, numbersMajor, black, goldenHourColor, 'fill');
+			drawsolarclockfields(ctx, radius, center, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'fill');
+			drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'fill');
+			drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'fill');
+		} else {
+			drawcircle(ctx, radius, center, numbersMajor, black, dayColor, 'fill');
+			drawsolarclockfields(ctx, radius, center, goldenHourEndAngle, goldenHourStartAngle, numbersMinor, black, goldenHourColor, 'fill');
+			drawsolarclockfields(ctx, radius, center, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'fill');
+			drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'fill');
+			drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'fill');
+		}
 	}
 
 	// Indicators
@@ -75,24 +97,6 @@ function drawKickAssClock (position) {
 	drawMarker(ctx, center, solarNoonAngle+1.0472, radius, markerWidth, 12, 'butt', black);
 
 	// Stroke the sun clock
-	if (times.night instanceof Date && !isNaN(times.night.valueOf())==false) {
-		drawcircle(ctx, radius, center, numbersMajor, black, dayColor, 'stroke');
-		drawsolarclockfields(ctx, radius, center, goldenHourEndAngle, goldenHourStartAngle, numbersMinor, black, goldenHourColor, 'stroke');
-		drawsolarclockfields(ctx, radius, center, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'stroke');
-		drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'stroke');
-		drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'stroke');
-	} else if (times.dawn instanceof Date && !isNaN(times.dawn.valueOf())==false) {
-		drawcircle(ctx, radius, center, numbersMajor, black, nightColor, 'stroke');
-	} else if (times.sunrise instanceof Date && !isNaN(times.sunrise.valueOf())==false) {
-		drawcircle(ctx, radius, center, numbersMajor, black, sunriseSetColor, 'stroke');
-		drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'stroke');
-		drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'stroke');
-	} else if (times.goldenHour instanceof Date && !isNaN(times.goldenHour.valueOf())==false) {
-		drawcircle(ctx, radius, center, numbersMajor, black, goldenHourColor, 'stroke');
-		drawsolarclockfields(ctx, radius, center, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'stroke');
-		drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'stroke');
-		drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'stroke');
-	}
 
 	// 24 hour clock hour indicators
 	drawNumbers(ctx, center, markerRadius, numbersMinor, numbersMinor, numbersMajor*1.5, numbersMajor*2, 'butt', black);
@@ -101,6 +105,39 @@ function drawKickAssClock (position) {
 	drawmoonphase(ctx, midnightAngle, center, radius*.125, moonface.phase, moonface.fraction, numbersMinor);
 
 	// Stroke the clocks
+	// 24 hour sun
+	if ((position.latitude >= 0 && allDaySun == 'north') || (position.latitude <= 0 && allDaySun == 'south')) {
+		drawcircle(ctx, radius, center, numbersMajor, black, dayColor, 'stroke');
+		drawsolarclockfields(ctx, radius, center, goldenHourEndAngle, goldenHourStartAngle, numbersMinor, black, goldenHourColor, 'stroke');
+		drawsolarclockfields(ctx, radius, center, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'stroke');
+		drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'stroke');
+		drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'stroke');
+	}
+	// 24 hour night
+	if ((position.latitude >= 0 && allDaySun == 'south') || (position.latitude <= 0 && allDaySun == 'north')) {
+		if (!isNaN(times.night.valueOf())==false) {
+			drawcircle(ctx, radius, center, numbersMajor, black, nightColor, 'stroke');
+		} else if (!isNaN(times.dawn.valueOf())==false) {
+			drawcircle(ctx, radius, center, numbersMajor, black, twilightColor, 'stroke');
+			drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'stroke');
+		} else if (!isNaN(times.sunrise.valueOf())==false) {
+			drawcircle(ctx, radius, center, numbersMajor, black, sunriseSetColor, 'stroke');
+			drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'stroke');
+			drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'stroke');
+		} else if (!isNaN(times.goldenHour.valueOf())==false) {
+			drawcircle(ctx, radius, center, numbersMajor, black, goldenHourColor, 'stroke');
+			drawsolarclockfields(ctx, radius, center, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'stroke');
+			drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'stroke');
+			drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'stroke');
+		} else {
+			drawcircle(ctx, radius, center, numbersMajor, black, dayColor, 'stroke');
+			drawsolarclockfields(ctx, radius, center, goldenHourEndAngle, goldenHourStartAngle, numbersMinor, black, goldenHourColor, 'stroke');
+			drawsolarclockfields(ctx, radius, center, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'stroke');
+			drawsolarclockfields(ctx, radius, center, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'stroke');
+			drawsolarclockfields(ctx, radius, center, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'stroke');
+		}
+	}
+
 	// Draw the moon stroke
 	if (up==true) {
 		drawcircle(ctx, radius, center, numbersMajor, moonColor, dayColor, 'stroke'); // Sun clock stroke
