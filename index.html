@@ -4,12 +4,20 @@
 	<head>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" href="style.css"/>
+		<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
 		<title>Solar clock</title>
 	</head>
 	<body>
-		<div class="container">
-			<canvas id="clock" width="500" height="500"></canvas>
+		<div class="container" id="clockContainer">
+			<canvas id="clock"></canvas>
 		</div>
+		<nav>
+			<ul>
+				<li><a href="https://sirons.atlassian.net/servicedesk/customer/portal/8">Report a bug or suggest a feature</a></li>
+			</ul>
+		</nav>
 		<script src="js/suncalc.js"></script>
 		<script src="js/highschoolmath.js"></script>
 		<script src="js/drawmoonstroke.js"></script>
@@ -30,10 +38,14 @@
 			function success(pos) {
 				// Get lat long based on browser's geolocation
 				var crd = pos.coords;
+
+				//Set up the canvas
 				var canvas = document.getElementById("clock");
 				var ctx = canvas.getContext("2d");
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				var center = centerCanvas(canvas);
+				ctx.canvas.width  = window.innerWidth*.9;
+  				ctx.canvas.height = window.innerHeight*.9;
+				document.getElementById('clockContainer').setAttribute("style","width:"+ctx.canvas.width+"px");
 				drawKickAssClock(crd, canvas);
 			}
 
@@ -42,7 +54,7 @@
 			};
 
 			navigator.geolocation.getCurrentPosition(success,error,options);
-			setInterval(function(){navigator.geolocation.getCurrentPosition(success,error,options);}, 5000);
+			setInterval(function(){navigator.geolocation.getCurrentPosition(success,error,options);}, 50000);
 		</script>
 	</body>
 </html>

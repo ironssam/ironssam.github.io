@@ -1,7 +1,6 @@
-html{
-	background: #ccc;
+html {
+	background: #d0d0d0;
 }
-.container {
-	margin: 125px auto;
-	width: 500px;
+canvas {
+	margin: 1.5em;
 }
