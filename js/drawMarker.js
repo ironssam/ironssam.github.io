@@ -1,8 +1,8 @@
-function drawMarker(canvas, center, angle, radius, width, length, cap, color) {
+function drawMarker(canvas, centerX, centerY, angle, radius, width, length, cap, color) {
 	canvas.lineCap = cap;
 	canvas.lineWidth = width;
 	canvas.strokeStyle = color;
-	canvas.translate(center, center);
+	canvas.translate(centerY, centerX);
 	var px1 = angleToX(angle,radius);
 	var py1 = Math.sin(angle)*radius;
 	var px2 = Math.cos(angle)*(radius+length);
@@ -12,5 +12,5 @@ function drawMarker(canvas, center, angle, radius, width, length, cap, color) {
 	canvas.lineTo(px2,py2);
 	canvas.stroke();
 	canvas.closePath();
-	canvas.translate(-center, -center);
+	canvas.translate(-centerY, -centerX);
 }

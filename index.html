@@ -35,6 +35,13 @@
 			  maximumAge: 0
 			};
 
+			var canvas = document.getElementById("clock");
+			var ctx = canvas.getContext("2d");
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.canvas.width  = window.innerWidth*.85;
+			ctx.canvas.height = window.innerHeight*.85;
+			document.getElementById('clockContainer').setAttribute("style","width:"+ctx.canvas.width+"px;"+"margin:0 auto;");
+
 			function success(pos) {
 				// Get lat long based on browser's geolocation
 				var crd = pos.coords;
@@ -43,9 +50,6 @@
 				var canvas = document.getElementById("clock");
 				var ctx = canvas.getContext("2d");
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				ctx.canvas.width  = window.innerWidth*.9;
-  				ctx.canvas.height = window.innerHeight*.9;
-				document.getElementById('clockContainer').setAttribute("style","width:"+ctx.canvas.width+"px");
 				drawKickAssClock(crd, canvas);
 			}
 

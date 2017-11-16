@@ -1,10 +1,13 @@
 function centerCanvas(canvas) {
 	var canvasWidth = canvas.width;
 	var canvasHeight = canvas.height;
-	if (canvasWidth > canvasHeight) {
-		var center = canvasHeight/2;
+	var centerx = canvasHeight/2;
+	var centery = canvasWidth/2;
+	if (canvasWidth >= canvasHeight) {
+		var littleSide = centerx;
 	} else {
-		var center = canvasWidth/2;
+		var littleSide = centery;
 	}
+	var center = { xpos: centerx, ypos: centery, centerSmall: littleSide };
 	return center;
 }

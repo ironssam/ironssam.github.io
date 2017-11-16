@@ -1,7 +1,7 @@
-function drawNumbers(canvas, center, radius, width1, width2, minorLength, majorLength, cap, color) {
+function drawNumbers(canvas, centerX, centerY, radius, width1, width2, minorLength, majorLength, cap, color) {
     canvas.strokeStyle = color;
     canvas.lineCap = cap;
-    canvas.translate(center, center);
+    canvas.translate(centerY, centerX);
     for (var a=0,aMax=(2*Math.PI),aStep=(Math.PI/12); a<aMax; a+=aStep){
 	    var px1 = Math.sin(a)*(radius-minorLength);
 	    var py1 = Math.cos(a)*(radius-minorLength);
@@ -26,5 +26,5 @@ function drawNumbers(canvas, center, radius, width1, width2, minorLength, majorL
 	    canvas.stroke();
 		canvas.closePath();
 	};
-	canvas.translate(-center, -center);
+	canvas.translate(-centerY, -centerX);
 }
