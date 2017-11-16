@@ -119,7 +119,7 @@ function drawKickAssClock (position) {
 	}
 	if (down==false && up==false) {
 		drawcircle(ctx, radius, posx, posy, numbersMajor, black, dayColor, 'stroke'); // Sun clock stroke
-		drawmoonstroke(ctx, center, moonriseAngle, moonsetAngle, radius, moonColor, numbersMajor+1, 'square');
+		drawmoonstroke(ctx, posx, posy, moonriseAngle, moonsetAngle, radius, moonColor, numbersMajor+1, 'square');
 	}
 
 	drawcircle(ctx, markerRadius, posx, posy, numbersMinor, black, dayColor, 'stroke'); // 24 hour clock stroke
