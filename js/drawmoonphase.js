@@ -7,8 +7,10 @@ function drawmoonphase(canvas, midnightangle, centerX, centerY, radius, phase, f
 	var startY = angleToY(.5*Math.Pi, radius);
 	var endX = angleToX(1.5*Math.Pi*radius);
 	var endY = angleToY(1.5*Math.Pi*radius);
+	var midnightangleX = angleToY(midnightangle, radius*5);
+	var midnightangleY = angleToX(midnightangle, radius*5);
 	canvas.lineWidth = strokeWidth;
-	canvas.translate(centerY, centerX+(radius*5));
+	canvas.translate(centerY-midnightangleY, centerX-midnightangleX);
 	//draw background
 	if (phase > .5) {
 		canvas.fillStyle = "#fff";
@@ -39,5 +41,5 @@ function drawmoonphase(canvas, midnightangle, centerX, centerY, radius, phase, f
 	canvas.arc(0,0, radius, 0, 2*Math.PI, true);
 	canvas.stroke();
 	canvas.closePath();
-	canvas.translate(-centerY, -(centerX+(radius*5)));
+	canvas.translate(-(centerY-midnightangleY), -(centerX-midnightangleX));
 }

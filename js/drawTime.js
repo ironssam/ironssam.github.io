@@ -34,7 +34,7 @@ function drawAlpha(ctx, centerX, centerY, radius) {
     ctx.fillStyle = "#000";
     ctx.translate(centerY, centerX);
     ctx.rotate(Math.PI);
-    for(num= 3; num < 25;){
+    for(num= 0; num < 24;){
         ang = (num * Math.PI / 12)+Math.PI;
         ctx.rotate(ang);
         ctx.translate(0, -radius*0.85);
