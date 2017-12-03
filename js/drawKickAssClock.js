@@ -106,10 +106,11 @@ function drawKickAssClock (position) {
 	drawNumbers(ctx, posx, posy, markerRadius, numbersMinor, numbersMinor, numbersMajor*1.5, numbersMajor*2, 'butt', black);
 
 	// Moon phase clock indicator stroke
-	drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*.125, moonface.phase, moonface.fraction, numbersMinor);
+	drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle);
 
 	// Indicators
 	drawMarker(ctx, posx, posy, solarNoonAngle, radius, markerWidth, radius/10, 'butt', dayColor); //Solar noon indicator
+	drawMarker(ctx, posx, posy, solarNoonAngle+(1*Math.PI), radius, markerWidth, radius/10, 'butt', black); //Darkest of dark night indicator
 	drawMarker(ctx, posx, posy, solarNoonAngle-1.0472, radius, markerWidth, radius/10, 'butt', black); // Solar 8 hour working day
 	drawMarker(ctx, posx, posy, solarNoonAngle+1.0472, radius, markerWidth, radius/10, 'butt', black);
 
