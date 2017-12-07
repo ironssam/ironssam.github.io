@@ -4,7 +4,7 @@ function drawmoonstroke(canvas, centerX, centerY, rise, set, radius, color, widt
 	canvas.lineCap = cap;
 	canvas.translate(centerY, centerX);
 	canvas.beginPath();
-	canvas.arc(0,0,radius,rise,set);
+	canvas.arc(0,0,radius*.77,rise,set);
 	canvas.stroke();
 	canvas.closePath();
 	canvas.translate(-centerY, -centerX);
