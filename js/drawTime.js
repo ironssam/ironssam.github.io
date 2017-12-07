@@ -28,7 +28,7 @@ function drawHand(centerX, centerY, ctx, pos, length, width) {
 function drawAlpha(ctx, centerX, centerY, radius) {
 	var ang;
     var num;
-    ctx.font = radius*0.10 + "px arial";
+    ctx.font = radius*0.24 + "px arial";
     ctx.textBaseline="middle";
     ctx.textAlign="center";
     ctx.fillStyle = "#000";
@@ -37,11 +37,11 @@ function drawAlpha(ctx, centerX, centerY, radius) {
     for(num= 0; num < 24;){
         ang = (num * Math.PI / 12)+Math.PI;
         ctx.rotate(ang);
-        ctx.translate(0, -radius*0.85);
+        ctx.translate(0, -radius);
         ctx.rotate(-ang);
         ctx.fillText(num.toString(), 0, 0);
         ctx.rotate(ang);
-        ctx.translate(0, radius*0.85);
+        ctx.translate(0, radius);
         ctx.rotate(-ang);
         num = num + 3;
     }

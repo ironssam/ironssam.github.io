@@ -8,11 +8,9 @@ function drawmoonphase(canvas, midnightangle, centerX, centerY, radius, phase, f
 	var endX = angleToX(1.5*Math.Pi*radius);
 	var endY = angleToY(1.5*Math.Pi*radius);
 	var highMoonAngle = (riseAngle + setAngle)/2;
-	var midnightangleX = angleToY(highMoonAngle, radius*6);
-	var midnightangleY = angleToX(highMoonAngle, radius*6);
+	var midnightangleX = angleToY(highMoonAngle, radius*4);
+	var midnightangleY = angleToX(highMoonAngle, radius*4);
 	var rotation = (-(latitude/90)*(.5*Math.PI)+(.5*Math.PI));
-	console.log(latitude);
-	console.log(rotation);
 	canvas.lineWidth = strokeWidth;
 	canvas.translate(centerY-midnightangleY, centerX-midnightangleX);
 	canvas.rotate(rotation);

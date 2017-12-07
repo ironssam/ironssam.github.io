@@ -39,7 +39,7 @@ function drawKickAssClock (position) {
 	var numbersMiddle = responsiveStroke/72; // Medium stroke
 	var numbersMajor = responsiveStroke/54; // Heavy stroke
 	var markerWidth = numbersMajor;
-	var radius = small*.7; // Solar clock radius
+	var radius = small-numbersMajor; // Solar clock radius
 	var markerRadius = small-numbersMajor; // 24 hour clock radius
 	var moonRadius = radius-(7); // Moon times indicator radius
 	var moonStroke = 14;
@@ -115,14 +115,14 @@ function drawKickAssClock (position) {
 	}
 
 	// Moon phase clock indicator stroke
-	drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle, position.latitude);
+	drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle, position.latitude);
 
 	drawcircle(ctx, radius, posx, posy, numbersMiddle, black, dayColor, 'stroke'); // Sun clock stroke
 
 	// Draw the time
 	// 24 hour clock hour indicators
-	drawNumbers(ctx, posx, posy, markerRadius, numbersMinor, numbersMinor, numbersMajor*1.5, numbersMajor*2, 'butt', black);
-	drawTime(posx, posy, ctx, markerRadius, numbersMiddle);
-	drawAlpha(ctx, posx, posy, markerRadius);
-	drawcircle(ctx, markerRadius, posx, posy, numbersMinor, black, dayColor, 'stroke'); // 24 hour clock stroke
+	drawNumbers(ctx, posx, posy, markerRadius, numbersMinor, numbersMinor, numbersMajor*2, numbersMajor*3, 'butt', black);
+	drawTime(posx, posy, ctx, radius, numbersMiddle);
+	drawAlpha(ctx, posx, posy, radius*.75);
+	//drawcircle(ctx, markerRadius*.75, posx, posy, numbersMinor, black, dayColor, 'stroke'); // 24 hour clock stroke
 }
