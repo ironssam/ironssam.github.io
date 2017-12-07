@@ -72,7 +72,7 @@ function drawKickAssClock (position) {
 	if ((position.latitude >= 0 && allDaySun == 'north') || (position.latitude <= 0 && allDaySun == 'south')) {
 		drawcircle(ctx, radius, posx, posy, numbersMajor, black, dayColor, 'fill');
 		drawsolarclockfields(ctx, radius, posx, posy, goldenHourEndAngle, goldenHourStartAngle, numbersMinor, black, goldenHourColor, 'fill');
-		drawsolarclockfields(ctx, radius, posx, posy, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'fill');
+		drawsolarclockfields(ctx, radius, posx, posy, sunsetAngle, sunriseAngle, numbersMinor, black, sunriseSetColor, 'both');
 		drawsolarclockfields(ctx, radius, posx, posy, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'fill');
 		drawsolarclockfields(ctx, radius, posx, posy, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'fill');
 	}
