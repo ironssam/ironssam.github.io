@@ -105,14 +105,14 @@ function drawKickAssClock (position) {
 
 	// Moon came up today? Sets today?
 	if (moontimes.rise == null && moontimes.set != null) { // Rose yesterday and sets today
-		var moonriseAngle = 0;
+		var moonriseAngle = 0+(.5*Math.PI);
 		var moonsetAngle = timeToRadians(moontimes.set);
 	} else if (moontimes.rise == null && moontimes.set == null) { // Always up or always down
-		var moonriseAngle = 0;
-		var moonsetAngle = 2*Math.PI;
+		var moonriseAngle = 0+(.5*Math.PI);
+		var moonsetAngle = 2*Math.PI+(.5*Math.PI);
 	} else if (moontimes.rise != null && moontimes.set == null) { // Rose today, sets tomorrow
 		var moonriseAngle = timeToRadians(moontimes.rise);
-		var moonsetAngle = 2*Math.PI;
+		var moonsetAngle = 2*Math.PI+(.5*Math.PI);
 	}
 	else { // Rises today AND sets today
 		var moonriseAngle = timeToRadians(moontimes.rise);
