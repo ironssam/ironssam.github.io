@@ -107,16 +107,20 @@ function drawKickAssClock (position) {
 	if (moontimes.rise == null && moontimes.set != null) { // Rose yesterday and sets today
 		var moonriseAngle = 0+(.5*Math.PI);
 		var moonsetAngle = timeToRadians(moontimes.set);
+		var wtf = 'onlyset';
 	} else if (moontimes.rise == null && moontimes.set == null) { // Always up or always down
 		var moonriseAngle = 0+(.5*Math.PI);
 		var moonsetAngle = 2*Math.PI+(.5*Math.PI);
+		var wtf = 'always';
 	} else if (moontimes.rise != null && moontimes.set == null) { // Rose today, sets tomorrow
 		var moonriseAngle = timeToRadians(moontimes.rise);
 		var moonsetAngle = 2*Math.PI+(.5*Math.PI);
+		var wtf = 'onlyrise';
 	}
 	else { // Rises today AND sets today
 		var moonriseAngle = timeToRadians(moontimes.rise);
 		var moonsetAngle = timeToRadians(moontimes.set);
+		var wtf = 'normal';
 	}
 
 	// Draw the moon stroke
@@ -125,7 +129,11 @@ function drawKickAssClock (position) {
 		drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, 0.5*Math.PI, 0.5*Math.PI, position.latitude);
 	}
 	if (down==false && up==false) {
-		drawmoonstroke(ctx, posx, posy, moonriseAngle, moonsetAngle, radius, black, numbersMinor, 'square');
+		if (wtf == 'onlyset' || wtf == 'normal') {
+			drawmoonstroke(ctx, posx, posy, moonriseAngle, moonsetAngle, radius, black, numbersMinor, 'square');
+		} else {
+			drawmoonstroke(ctx, posx, posy, moonsetAngle, moonriseAngle, radius, black, numbersMinor, 'square');
+		}
 		drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle, position.latitude);
 	}
 
