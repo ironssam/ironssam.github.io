@@ -17,6 +17,7 @@ function drawKickAssClock (position) {
 	var moonface = SunCalc.getMoonIllumination(today);
 	var up = Boolean(moontimes.alwaysUp);
 	var down = Boolean(moontimes.alwaysDown);
+	console.log(moontimes);
 
 	// Set up the canvas
 	var canvas = document.getElementById("clock");
@@ -64,8 +65,6 @@ function drawKickAssClock (position) {
 	var twilightEndAngle = timeToRadians(times.dawn);
 	var goldenHourStartAngle = timeToRadians(times.goldenHourEnd);
 	var goldenHourEndAngle = timeToRadians(times.goldenHour);
-	var moonriseAngle = timeToRadians(moontimes.rise);
-	var moonsetAngle = timeToRadians(moontimes.set);
 
 	// Fill the sun clock
 	// 24 hour sun
@@ -103,20 +102,34 @@ function drawKickAssClock (position) {
 
 	// Indicators
 	drawLine(ctx, posx, posy, solarNoonAngle, radius, numbersMinor, radius/10, 'butt', black); //Solar noon indicator
-	//drawMarker(ctx, posx, posy, solarNoonAngle-1.0472, radius, markerWidth, radius/10, 'butt', black); // Solar 8 hour working day
-	//drawMarker(ctx, posx, posy, solarNoonAngle+1.0472, radius, markerWidth, radius/10, 'butt', black);
+
+	// Moon came up today? Sets today?
+	if (moontimes.rise == null && moontimes.set != null) { // Rose yesterday and sets today
+		var moonriseAngle = 0;
+		var moonsetAngle = timeToRadians(moontimes.set);
+	} else if (moontimes.rise == null && moontimes.set == null) { // Always up or always down
+		var moonriseAngle = 0;
+		var moonsetAngle = 2*Math.PI;
+	} else if (moontimes.rise != null && moontimes.set == null) { // Rose today, sets tomorrow
+		var moonriseAngle = timeToRadians(moontimes.rise);
+		var moonsetAngle = 2*Math.PI;
+	}
+	else { // Rises today AND sets today
+		var moonriseAngle = timeToRadians(moontimes.rise);
+		var moonsetAngle = timeToRadians(moontimes.set);
+	}
 
 	// Draw the moon stroke
 	if (up==true) {
-		drawcircle(ctx, radius, posx, posy, numbersMajor, black, dayColor, 'stroke'); // Sun clock stroke
+		drawcircle(ctx, radius, posx, posy, numbersMajor, black, dayColor, 'stroke'); // Moon clock stroke
+		drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, 0.5*Math.PI, 0.5*Math.PI, position.latitude);
 	}
 	if (down==false && up==false) {
 		drawmoonstroke(ctx, posx, posy, moonriseAngle, moonsetAngle, radius, black, numbersMinor, 'square');
+		drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle, position.latitude);
 	}
 
-	// Moon phase clock indicator stroke
-	drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle, position.latitude);
-
+	// Stroke the clock
 	drawcircle(ctx, radius, posx, posy, numbersMiddle, black, dayColor, 'stroke'); // Sun clock stroke
 
 	// Draw the time
