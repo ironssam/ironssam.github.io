@@ -18,7 +18,6 @@ function drawKickAssClock (position) {
 	var moonface = SunCalc.getMoonIllumination(today);
 	var up = Boolean(moontimes.alwaysUp);
 	var down = Boolean(moontimes.alwaysDown);
-	console.log(moontimes);
 
 	// Set up the canvas
 	var canvas = document.getElementById("clock");
@@ -145,11 +144,9 @@ function drawKickAssClock (position) {
 	// If it's always up, draw a circle
 	// If it's always down, do nothing
 	if (up==true) {
-		drawcircle(ctx, radius, posx, posy, numbersMajor, black, dayColor, 'stroke'); // Moon clock stroke
+		drawcircle(ctx, radius*.5, posx, posy, numbersMinor, black, dayColor, 'stroke'); // Moon clock stroke
 		drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, 0.5*Math.PI, 0.5*Math.PI, position.latitude);
-	}
-	// If it rises/sets, draw the arc to indicate times
-	if (down==false && up==false) {
+	} else if (down==false && up==false) {
 		// If the moon only sets, or rises/sets, or sets/rises do this
 		if (wtf == 'onlyset' || wtf == 'normal') {
 			if (moonsetSec < moonriseSec) { // if it sets then rises
