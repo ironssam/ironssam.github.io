@@ -93,13 +93,13 @@ function drawKickAssClock (position) {
 			drawsolarclockfields(ctx, radius, posx, posy, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'fill');
 		} else if (!isNaN(times.goldenHour.valueOf())==false) {
 			drawcircle(ctx, radius, posx, posy, numbersMajor, black, goldenHourColor, 'fill');
-			drawsolarclockfields(ctx, radius, posx, posy, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'both');
+			drawsolarclockfields(ctx, radius, posx, posy, sunsetAngle, sunriseAngle, numbersMinor, black, sunriseSetColor, 'both');
 			drawsolarclockfields(ctx, radius, posx, posy, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'fill');
 			drawsolarclockfields(ctx, radius, posx, posy, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'fill');
 		} else {
 			drawcircle(ctx, radius, posx, posy, numbersMajor, black, dayColor, 'fill');
 			drawsolarclockfields(ctx, radius, posx, posy, goldenHourEndAngle, goldenHourStartAngle, numbersMinor, black, goldenHourColor, 'fill');
-			drawsolarclockfields(ctx, radius, posx, posy, sunsetAngle, sunriseAngle, numbersMiddle, black, sunriseSetColor, 'both');
+			drawsolarclockfields(ctx, radius, posx, posy, sunsetAngle, sunriseAngle, numbersMinor, black, sunriseSetColor, 'both');
 			drawsolarclockfields(ctx, radius, posx, posy, twilightStartAngle, twilightEndAngle, numbersMinor, black, twilightColor, 'fill');
 			drawsolarclockfields(ctx, radius, posx, posy, nightStartAngle, nightEndAngle, numbersMinor, black, nightColor, 'fill');
 		}
