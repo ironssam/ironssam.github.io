@@ -139,7 +139,13 @@ function drawKickAssClock (position) {
 				var moonsetAngle1 = 2*Math.PI+(.5*Math.PI);
 				drawmoonstroke(ctx, posx, posy, moonriseAngle1, moonsetAngle, radius*1.025, black, numbersMinor, 'square');
 				drawmoonstroke(ctx, posx, posy, moonriseAngle, moonsetAngle1, radius*.975, black, numbersMinor, 'square');
-				drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle1, position.latitude);
+				var compare = moonriseAngle1 - moonsetAngle;
+				var contrast = moonriseAngle - moonsetAngle1;
+				if (contrast <= compare) {
+					drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle1, position.latitude);
+				} else {
+					drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle1, moonsetAngle, position.latitude);
+				}
 			} else {
 				drawmoonstroke(ctx, posx, posy, moonriseAngle, moonsetAngle, radius, black, numbersMinor, 'square');
 				drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle, position.latitude);
