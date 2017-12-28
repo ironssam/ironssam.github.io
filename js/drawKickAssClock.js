@@ -122,6 +122,10 @@ function drawKickAssClock (position) {
 		var moonsetAngle = timeToRadians(moontimes.set);
 		var wtf = 'normal';
 	}
+	// get UNIX timestamp to see which came first
+	var moonriseSec = moontimes.rise.getTime() / 1000;
+	var moonsetSec = moontimes.set.getTime() / 1000;
+
 
 	// Draw the moon stroke
 	if (up==true) {
@@ -130,11 +134,20 @@ function drawKickAssClock (position) {
 	}
 	if (down==false && up==false) {
 		if (wtf == 'onlyset' || wtf == 'normal') {
-			drawmoonstroke(ctx, posx, posy, moonriseAngle, moonsetAngle, radius, black, numbersMinor, 'square');
+			if (moonsetSec < moonriseSec) {
+				var moonriseAngle1 = 0+(.5*Math.PI);
+				var moonsetAngle1 = 2*Math.PI+(.5*Math.PI);
+				drawmoonstroke(ctx, posx, posy, moonriseAngle1, moonsetAngle, radius*1.025, black, numbersMinor, 'square');
+				drawmoonstroke(ctx, posx, posy, moonriseAngle, moonsetAngle1, radius*.975, black, numbersMinor, 'square');
+				drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle1, position.latitude);
+			} else {
+				drawmoonstroke(ctx, posx, posy, moonriseAngle, moonsetAngle, radius, black, numbersMinor, 'square');
+				drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle, position.latitude);
+			}
 		} else {
 			drawmoonstroke(ctx, posx, posy, moonsetAngle, moonriseAngle, radius, black, numbersMinor, 'square');
+			drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle, position.latitude);
 		}
-		drawmoonphase(ctx, solarNoonAngle, posx, posy, radius*0.125, moonface.phase, moonface.fraction, numbersMinor, moonriseAngle, moonsetAngle, position.latitude);
 	}
 
 	// Stroke the clock
@@ -143,7 +156,7 @@ function drawKickAssClock (position) {
 	// Draw the time
 	// 24 hour clock hour indicators
 	drawNumbers(ctx, posx, posy, markerRadius, numbersMinor, numbersMinor, numbersMajor*2, numbersMajor*3, 'butt', black);
-	drawTime(posx, posy, ctx, radius, numbersMiddle);
 	drawAlpha(ctx, posx, posy, radius*.75);
+	drawTime(posx, posy, ctx, radius, numbersMiddle);
 	//drawcircle(ctx, markerRadius*.75, posx, posy, numbersMinor, black, dayColor, 'stroke'); // 24 hour clock stroke
 }

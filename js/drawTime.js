@@ -8,7 +8,6 @@ function drawTime(centerX, centerY, ctx, radius, width){
     var oneSecAngle = (360/86400) * (Math.PI/180);
     var nowSecAngle = nowSec * oneSecAngle;
     drawHand(centerX, centerY, ctx, nowSecAngle, radius, width);
-    ctx.translate(-centerY, -centerX);
 }
 
 function drawHand(centerX, centerY, ctx, pos, length, width) {
@@ -31,6 +30,8 @@ function drawHand(centerX, centerY, ctx, pos, length, width) {
     ctx.lineTo(0, -length);
     ctx.stroke();
     ctx.rotate(-pos);
+    ctx.rotate(-1*Math.PI);
+    ctx.translate(-centerY, -centerX);
 }
 
 function drawAlpha(ctx, centerX, centerY, radius) {
@@ -41,7 +42,6 @@ function drawAlpha(ctx, centerX, centerY, radius) {
     ctx.textAlign="center";
     ctx.fillStyle = "#000";
     ctx.translate(centerY, centerX);
-    ctx.rotate(Math.PI);
     for(num= 0; num < 24;){
         ang = (num * Math.PI / 12)+Math.PI;
         ctx.rotate(ang);
