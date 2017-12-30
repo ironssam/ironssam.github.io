@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>How to read the clock - Solar clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<article>
+		<header>
+			<h1>How to read the clock</h1>
+			<p>The clock takes your browser's current location on Earth (if you allow it). Along with your device's system time, it calculates current time, sun times, moon times, and the moon's phase.</p>
+			<nav>
+				<ul>
+					<li><a href="#time">Time</a></li>
+					<li><a href="#sunTime">Sun times</a></li>
+					<li><a href="moonTime">Moon times and phases</a></li>
+					<li><a href="solarNoon"></a>Solar noon and midnight</li>
+				</ul>
+			</nav>
+		</header>
+		<section>
+			<h2 id="time">Time</h2>
+			<p>The time of day is shown around the furthest radius of the clock. Time is indicated in 24 hour time.</p>
+			<p>00:00 is indicated at the bottom of the clock.</p>
+			<p>Numerals mark every 3 hours around the clock face.</p>
+			<img src="images/time.png" />
+			<p>Line markers are positioned at:</p>
+				<ul>
+					<li>Every hour, shown by the longest line demarcations</li>
+					<li>Every half hour, shown by the medium-length demarcations</li>
+					<li>Every quarter hour, shown by the minor demarcations</li>
+				</ul>
+			<p>The current time is displayed by the indicator spanning from the center of the clock to the outer radius. The clockface is redrawn every second (with some delay from calculating your browser's geolocation).</p>
+		</section>
+		<section>
+			<h2 id="sunTime">Sun times</h2>
+			<p>The luminance of the sun is shown as the backdrop for the clock's face. This colored backdrop marks daylight and night times for the current calendar day.</p>
+			<p>Where these colored fields meet the outer radius indicates when they occur during the day. Sunrise and sunset are stroked to make this time easier to see.</p>
+			<p>These colored fields change throughout the seasons, filling more with night during the winter, and more with day during the summer.</p>
+			<img src="images/face.png" />
+			<h3><span class="squareColor dayColor">&nbsp;</span>Day</h3>
+			<p>Day time is indicated by the lightest field of color.</p>
+			<h3><span class="squareColor goldenHourColor">&nbsp;</span>Golden hour</h3>
+			<p>The golden hour is indicated by the next shade. This time, along with dawn and dusk, is considered the best time for outdoor photography. The sun is above the horizon in this time.</p>
+			<h3><span class="squareColor black">&nbsp;</span>Sunrise and sunset</h3>
+			<p>The stroke between golden hour and dusk indicates sunrise and sunset times. Follow the stroke to where it meets the outer radius to determine sunrise and sunset times.</p>
+			<p>In the morning, this line represents the time when the sun has fully risen, all of the sun's radius is visible. In the evening, this line represents the time when the sun begins to descend below the horizon, not the time when it has fully set.</p>
+			<h3><span class="squareColor duskColor">&nbsp;</span>Dawn and dusk</h3>
+			<p>Dawn and dusk are similar to the golden hour, in that outdoor photographers prefer the temperature of light that is produced at these times. Unlike golden hour, the sun is below the horizon during dawn and dusk.</p>
+			<h3><span class="squareColor twilightColor">&nbsp;</span>Twilight</h3>
+			<p>The twilight color field indicates the time when stars become visible to the naked eye.</p>
+			<h3><span class="squareColor nightColor">&nbsp;</span>Night</h3>
+			<p>The night field indicates when the sky is at or near its darkest.</p>
+		</section>
+		<section>
+			<h2 id="moonTime">Moon times and phases</h2>
+			<p>The inner arc marks the times when the moon is present in the sky at your browser's location.</p>
+			<img src="images/moon.png" />
+			<p>The moon is visible when the time indicator intersects with the moon arc. If the moon is visible all day, the inner arc will show a complete circle. If the moon is not visible at all during the day, the moon and the arc will not display.</p>
+			<p>Moon times are calculated each calendar day. You may notice a break in the arc. This means that the moon rose on the previous calendar day or sets on the next calendar day.</p>
+			<p>The moon's phase is shown on the face of the moon:</p>
+			<ul>
+				<li>A new moon is shown as a completely black face.</li>
+				<li>A full moon is shown as a completely white face.</li>
+			</ul>
+			<p>Waning and waxing moons are shown by various arcs of illumination on the moon's face.</p>
+			<p>The moon's orientation is based on your latitude. For example, in the northern hemisphere, the moon waxes and wanes from right to left. In the southern hemisphere, it waxes and wanes from left to right. At the horizon, it fills like a boat.</p>
+			<p>This is a stylistic interpretation, as the appearance of the moon changes based on the moon's trajectory across the sky. But, it's fun to think about. Here in Australia, we see the moon and constellations upside down.</p>
+		</section>
+		<section>
+			<h2 id="solarNoon">Solar noon and midnight</h2>
+			<p>Finally, the marker that splits straight across the clock's face shows solar noon and midnight. This is the time when the sun is at it's highest point in the sky, or it's furthest point away at night.</p>
+	</article>
+</body>
+</html>
