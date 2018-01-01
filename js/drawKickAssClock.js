@@ -23,6 +23,7 @@ function drawKickAssClock (position) {
 	var canvas = document.getElementById("clock");
 	var center = centerCanvas(canvas);
 	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	var canvasWidth = canvas.width;
 	var canvasHeight = canvas.height;
 	var posx = center.xpos;
@@ -184,4 +185,5 @@ function drawKickAssClock (position) {
 	drawNumbers(ctx, posx, posy, markerRadius, numbersMinor, numbersMinor, numbersMajor*2, numbersMajor*3, 'butt', black);
 	drawAlpha(ctx, posx, posy, radius*.75);
 	drawTime(posx, posy, ctx, radius, numbersMiddle);
+	console.log('drawn');
 }

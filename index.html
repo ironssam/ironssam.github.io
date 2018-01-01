@@ -38,6 +38,14 @@
 		<script src="js/centerCanvas.js"></script>
 		<script src="js/drawKickAssClock.js"></script>
 		<script>
+			var now = new Date();
+			var midnight = new Date(
+			    now.getFullYear(),
+			    now.getMonth(),
+			    now.getDate() + 1, 0, 0, 0
+			);
+			var minsToMidnight = midnight.getTime() - now.getTime();
+
 			var options = {
 			  enableHighAccuracy: true,
 			  timeout: 5000,
@@ -51,23 +59,23 @@
 			ctx.canvas.height = window.innerHeight*.85;
 			document.getElementById('clockContainer').setAttribute("style","width:"+ctx.canvas.width+"px;"+"margin:0 auto;");
 
-			function success(pos) {
-				// Get lat long based on browser's geolocation
-				var crd = pos.coords;
-
-				//Set up the canvas
-				var canvas = document.getElementById("clock");
-				var ctx = canvas.getContext("2d");
-				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				drawKickAssClock(crd, canvas);
-			}
+			function geolocatethisbitch(callback) {
+				navigator.geolocation.getCurrentPosition(function(pos) {
+					var coordinates = pos.coords;
+					console.log('located');
+					callback(coordinates);
+				});
+			};
 
 			function error(err) {
 			  console.warn(`ERROR(${err.code}): ${err.message}`);
 			};
 
-			navigator.geolocation.getCurrentPosition(success,error,options);
-			setInterval(function(){navigator.geolocation.getCurrentPosition(success,error,options);}, 1000);
+			geolocatethisbitch(function(coordinates){
+				setInterval(function(){drawKickAssClock(coordinates)},1000);
+			});
+
+			setTimeout('document.location.refresh()', minsToMidnight);
 		</script>
 	</body>
 </html>
